@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+   
+    <div class="container">
+        <p class="heading">ToDo App</p>
+        <div class="textArea">
+            <input type="text" id="textbox" placeholder="Enter...">
+            <button class="addBtn">+</button>
+        </div>
+        <ul class="listBox">
+
+        </ul>
+    </div>
+    
+    <script>
+        const textbox = document.querySelector("#textbox");
+        const addBtn = document.querySelector(".addBtn");
+        const listBox = document.querySelector(".listBox");
+       
+
+        textbox.addEventListener('keyup', ()=>{
+            if(textbox.value.trim() != "" ){
+                addBtn.classList.add("active");
+                addBtn.addEventListener('click', ()=>{
+                    if(textbox.value.length != 0){
+                        creatList();
+                    }
+                })
+
+            }else{
+                addBtn.classList.remove("active");
+            }
+        });
+        function creatList(){
+            var listItem = document.createElement('li')
+            listBox.appendChild(listItem);
+            listItem.innerHTML += `<span> <input id='checkbox' type="checkbox"> ${textbox.value} </span> <i class="fa-solid fa-trash-can"></i> `;
+            textbox.value = ""; 
+        }
+        
+       listBox.addEventListener('click', (e)=>{
+        if( e.target.matches(".fa-solid")){
+                e.target.parentElement.remove();
+            }
+          
+       })
+        
+    </script>
+</body>
+</html>
